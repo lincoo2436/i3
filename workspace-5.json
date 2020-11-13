@@ -1,0 +1,44 @@
+{
+    "layout": "splitv",
+    "percent": 0.4,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "name": "process",
+            "percent": 0.5,
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^st$",
+                    "instance": "^work$"
+                }
+            ]
+        },
+                        {
+                    "name": "midna: ~",
+                    "percent": 0.5,
+                    "type": "con"
+                }
+            ]
+        }
+    
+
+
+{
+    // stacked split container with 1 children
+    "layout": "stacked",
+    "percent": 0.6,
+    "type": "con",
+    "nodes": [
+        {
+            "name": "st",
+            "type": "con",
+            "swallows": [
+                {
+                    "class": "^st$"
+                }
+            ]
+        }
+    ]
+}
