@@ -1,0 +1,14 @@
+#!/bin/sh
+menulist="firefox
+wyeb
+wps
+wpp
+et
+baidunetdisk
+zoom
+blueman-adapters
+FBReader
+gimp
+pavucontrol
+thunerbird"
+$(echo "$menulist" | dmenu -b -l 10 -p "最爱的程序") &

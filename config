@@ -108,7 +108,7 @@ mode "$mode_custom" {
 }
 
 #bindsym $mod+r exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+r exec --no-startup-id $HOME/bin/dmenu_extended_run
+bindsym $mod+r exec --no-startup-id $HOME/.i3/script/center.sh
 bindsym $mod+n exec --no-startup-id $HOME/.i3/script/mvswitch/mvswitcher
 #control volume
 bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute
