@@ -12,8 +12,10 @@ default_border pixel 3
 #bindsym $mod+n border normal
 bindsym $mod+w exec $control dynamic go
 bindsym $mod+Shift+w exec $control dynamic move
-
-
+# Title Format
+for_window [class=".*"] title_format "%title"
+# Drawing marks on window decoration
+show_marks yes
 floating_modifier $mod
 
 
@@ -24,9 +26,10 @@ bindsym $mod+F4 kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme $HOME/.i3/script/rofi.rasi -run-command
-bindsym $mod+x exec --no-startup-id clipmenu
+bindsym $mod+x exec --no-startup-id clipmenu -b -i -fn Terminus:size=12 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
-bindsym $mod+space exec --no-startup-id $HOME/.i3/script/dswitcher/dswitcher
+bindsym $mod+space exec --no-startup-id $HOME/.i3/script/center.sh
+bindsym mod1+Tab exec --no-startup-id $HOME/.i3/script/dswitcher/dswitcher
 
 # change focus
 bindsym $mod+h focus left
@@ -120,7 +123,6 @@ bindsym $mod+Control+k exec amixer set Master 5%- unmute
 
 
 # change focus with tab keys
-bindsym Mod1+Tab focus right
 bindsym Mod1+Shift+Tab focus left
 # workspaces
 set $ws1 1
@@ -356,30 +358,125 @@ set $mode_mouse 移动鼠标:上(w) 下(s) 左(a) 右(d) 左键(j) 右键(k) 上
 		bindsym $mod+o mode "$mode_mouse"
 
 		mode "$mode_mouse" {
-		bindsym w exec xdotool mousemove_relative -- 0 -20
-		bindsym a exec xdotool mousemove_relative -- -20 0
-		bindsym d exec xdotool mousemove_relative 20 0
-		bindsym s exec xdotool mousemove_relative 0 20
-		bindsym 1 exec xdotool mousemove 341 192
-		bindsym 2 exec xdotool mousemove 1024 192
-		bindsym 3 exec xdotool mousemove 341 576
-		bindsym 4 exec xdotool mousemove 1024 576
-		bindsym 0 exec xdotool mousemove 683 384
-		bindsym j exec xdotool click 1
-		bindsym k exec xdotool click 3
-		bindsym u exec xdotool click 4
-		bindsym i exec xdotool click 5
-		bindsym Escape mode "default"
+#		bindsym w exec xdotool mousemove_relative -- 0 -20
+#		bindsym a exec xdotool mousemove_relative -- -20 0
+#		bindsym d exec xdotool mousemove_relative 20 0
+#		bindsym s exec xdotool mousemove_relative 0 20
+#		bindsym 1 exec xdotool mousemove 341 192
+#		bindsym 2 exec xdotool mousemove 1024 192
+#		bindsym 3 exec xdotool mousemove 341 576
+#		bindsym 4 exec xdotool mousemove 1024 576
+#		bindsym 0 exec xdotool mousemove 683 384
+#		bindsym j exec xdotool click 1
+#		bindsym k exec xdotool click 3
+#		bindsym u exec xdotool click 4
+#		bindsym i exec xdotool click 5
+#		bindsym Escape mode "default"
+# set your three speeds here
+
+    set $slow 40
+    set $quick 10
+    set $fast 20
+
+    # Mouse movement (slow/fine-tuned) -- vim keybindings
+
+    bindsym a exec xdotool mousemove_relative -- -$slow 0
+    bindsym s exec xdotool mousemove_relative 0 $slow
+    bindsym w exec xdotool mousemove_relative -- 0 -$slow
+    bindsym d exec xdotool mousemove_relative $slow 0
+
+    # Mouse movement (slow/fine-tuned) -- arrow keys
+
+    bindsym Left exec xdotool mousemove_relative -- -$slow 0
+    bindsym Down exec xdotool mousemove_relative 0 $slow
+    bindsym Up exec xdotool mousemove_relative -- 0 -$slow
+    bindsym Right exec xdotool mousemove_relative $slow 0
+
+    # Mouse movement (quicker) -- vim keybindings
+
+    bindsym Shift+a exec xdotool mousemove_relative -- -$quick 0
+    bindsym Shift+s exec xdotool mousemove_relative 0 $quick
+    bindsym Shift+w exec xdotool mousemove_relative -- 0 -$quick
+    bindsym Shift+d exec xdotool mousemove_relative $quick 0
+
+    # Mouse movement (quicker) -- arrow keys
+
+    bindsym Shift+Left exec xdotool mousemove_relative -- -$quick 0
+    bindsym Shift+Down exec xdotool mousemove_relative 0 $quick
+    bindsym Shift+Up exec xdotool mousemove_relative -- 0 -$quick
+    bindsym Shift+Right exec xdotool mousemove_relative $quick 0
+
+    # Mouse movement (fast) -- vim keybindings
+
+    bindsym Shift+Mod1+a exec xdotool mousemove_relative -- -$fast 0
+    bindsym Shift+Mod1+s exec xdotool mousemove_relative 0 $fast
+    bindsym Shift+Mod1+w exec xdotool mousemove_relative -- 0 -$fast
+    bindsym Shift+Mod1+d exec xdotool mousemove_relative $fast 0
+
+    # Mouse movement (fast) -- arrow keys
+
+    bindsym Shift+Mod1+Left exec xdotool mousemove_relative -- -$fast 0
+    bindsym Shift+Mod1+Down exec xdotool mousemove_relative 0 $fast
+    bindsym Shift+Mod1+Up exec xdotool mousemove_relative -- 0 -$fast
+    bindsym Shift+Mod1+Right exec xdotool mousemove_relative $fast 0
+    
+    # Mouse movement (special down-right)
+
+    bindsym m exec xdotool mousemove_relative 10 10
+
+    # Left Click
+    bindsym j exec xdotool click 1
+
+    # Middle Click
+    bindsym k exec xdotool click 2
+
+    # Right Click
+    bindsym o exec xdotool click 3
+	#scroller
+    bindsym u exec xdotool click 4
+    bindsym i exec xdotool click 5
+    # Left Click-and-drag
+    bindsym Shift+j exec xdotool mousedown 1
+
+    # Middle Click-and-drag 
+    bindsym Shift+o exec xdotool mousedown 2
+
+    # Right Click-and-drag
+    bindsym Shift+k exec xdotool mousedown 3
+
+    # Left Drag release
+    bindsym Mod1+j exec xdotool mouseup 1
+
+    # Middle Drag release
+    bindsym Mod1+o exec xdotool mouseup 2
+
+    # Right Drag release
+    bindsym Mod1+k exec xdotool mouseup 3
+
+
+    # return to normal keybindings -- IMPORTANT!!
+
+    bindsym Escape mode "default"
 		}
 # 调用terminal打开程序
-		set $mode_terminal 打开程序:音乐(j) 文件(k) alsa(l) nvim(g)
-bindsym $mod+i mode "$mode_terminal"
-
-mode "$mode_terminal" {
-	bindsym j exec st -e ncmpc, mode "default"
-		bindsym k exec st -e ranger, mode "default"
-		bindsym l exec st -e alsamixer, mode "default"
-		bindsym g exec st -e nvim, mode "default"
+#		set $mode_terminal 打开程序:音乐(j) 文件(k) alsa(l) nvim(g)
+#bindsym $mod+i mode "$mode_terminal"
+#
+#mode "$mode_terminal" {
+#	bindsym j exec st -e ncmpc, mode "default"
+#		bindsym k exec st -e ranger, mode "default"
+#		bindsym l exec st -e alsamixer, mode "default"
+#		bindsym g exec st -e nvim, mode "default"
+#		bindsym Escape mode "default"
+#}
+## 隐藏窗口
+		set $mode_visiable 透明化:(i)nvisibale,(r)ecover,(3)30%,(5)50% 
+bindsym $mod+i mode "$mode_visiable"
+mode "$mode_visiable" {
+		bindsym i exec transset-df -a -x 0.1 , mode "default"
+		bindsym r exec transset-df -a -m 1 , mode "default"
+		bindsym 3 exec transset-df -a -x 0.3 , mode "default"
+		bindsym 5 exec transset-df -a -x 0.5, mode "default"
 		bindsym Escape mode "default"
 }
 ## rules
@@ -421,3 +518,22 @@ bar {
 ## send signal
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
 bindsym --release Num_Lock exec pkill -SIGRTMIN+11 i3blocks
+## 设置属于日文键盘的leader key
+		set $mode_leader leader键位:(r)esize , m(o)use , (i)ransset-df , (f)irefox ,(a)lsamixer,(b)lueman,(c)lipmenu,(m)arks,(g)tomarks ,s(w)itchwindow
+bindcode 100 mode "$mode_leader"
+
+mode "$mode_leader" {
+		bindsym r mode "resize"
+		bindsym o mode "$mode_mouse" 
+		bindsym i mode "$mode_visiable" 
+		bindsym l mode "$mode_system" 
+		bindsym w exec rofi -show window -theme /home/lincoo/.local/share/rofi/themes/sidetab.rasi ,mode "default"
+		bindsym f exec firefox , mode "default"
+		bindsym a exec st -e alsamixer , mode "default"
+		bindsym s sticky toggle , mode "default"
+		bindsym b exec blueman-manager, mode "default"
+		bindsym c exec clipmenu -i -b -fn Terminus:size=12 ,mode "default"
+		bindsym m exec i3-input -F 'mark %s' -l 1 -P 'Mark: ' ,mode "default"
+		bindsym g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: ' ,mode "default"
+		bindsym Escape mode "default"
+}

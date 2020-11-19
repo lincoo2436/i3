@@ -1,0 +1,14 @@
+## i3
+/home/lincoo/.i3/config
+## fzfproject
+/home/lincoo/Documents/project.txt
+## zsh
+/home/lincoo/.zshrc
+## tmux
+/home/lincoo/.tmux.conf
+## nvim
+/home/lincoo/.vimrc
+## pathrc
+/home/lincoo/.i3/rcpath.txt
+## center.sh
+/home/lincoo/.i3/script/center.sh

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash 
 
 # -----------------------------------------------------------------------------
 # Info:
@@ -54,17 +54,18 @@ main() {
 #  get_books
 #  book=$( (gen_list) | rofi -dmenu -i -fuzzy -only-match -location 0 -p "Book > " )
 #  book=$( (gen_list) | fzf )
-if [$project_select == ""];then
+if [ $project_select == "" ];then
 	exit 0
 else
-	echo "Please input number 1 is ranger, 2 is firefox, 3 is surf, 4 is wps, 5 is wpp, 6 is wyeb"
+	echo "Please input number 1 is ranger, 2 is firefox, 3 is 直接跳转目录, 4 is wps, 5 is wpp, 6 is wyeb"
 	read i
 	case $i in
 	1) ranger "$project_select"
 		;;
 	2) firefox "$project_select"
 		;;
-	3) surf "$project_select"
+	3) cd "$project_select"
+		sleep 0.5
 		;;
 	4) wps "$project_select"
 		;;
@@ -78,5 +79,4 @@ fi
 }
 
 main 
-
 exit 0
